@@ -7,8 +7,8 @@ const db = require('../data/db-config')
 
 router.get('/', (req, res) => {
   db('recipes')
-  .then(species => {
-    res.status(200).json(species)
+  .then(recipes => {
+    res.status(200).json(recipes)
   })
   .catch(error => {
     res.status(500).json({message: 'error getting recipes'})
