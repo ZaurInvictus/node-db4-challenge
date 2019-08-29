@@ -1,7 +1,7 @@
 const express = require('express')
 const helmet = require('helmet')
 
-const recipes = require('../routes/recipes.js')
+const recipes = require('../routes/recipe-routes')
 
 const server = express()
 
