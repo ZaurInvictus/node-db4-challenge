@@ -16,13 +16,13 @@ router.get('/', (req, res) => {
 })
 
 
-router.get('/:id/instructions', async (req, res, next) => {
+router.get('/:id/instructions', async (req, res) => {
   const { id } = req.params;
   try {
     const instructions = await recipeModels.getInstructions(id);
     res.status(200).json(instructions);
   } catch (error) {
-    next(new Error('We could not get the instructions'));
+    res.status(500).json({message: 'error getting instructions'})
   }
 })
 
