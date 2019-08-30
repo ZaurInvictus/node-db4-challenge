@@ -12,11 +12,13 @@ function getRecipes() {
 }
 
 
-function getInstructions(id) {
-  return  db('instructions as i') //Primary table
-  .join('recipes', 'i.recipe_id', 'recipes.recipe_id')
-  .select('i.id', 'recipes.recipe_name', 'i.instruction_desc' )
-  .where({ recipe_id: id})
+function getInstructions(recipe_id) {
+  return db('recipes')
+    .select(
+      'instructions.instruction_desc'
+    )
+    .innerJoin('instructions', 'instructions.recipe_id', 'recipes.id')
+    .where({ recipe_id }).first()
 }
 
 
@@ -24,7 +26,7 @@ function getInstructions(id) {
 function getShoppingList(recipe_id) {
   return db('recipes')
     .select(
-      'ingredients.name',
+      'ingredients.ingredient_name',
       'shoppingList.ingredients_quantity',
     )
     .innerJoin('ingredients', 'ingredients.id', 'shoppingList.ingredient_id')
